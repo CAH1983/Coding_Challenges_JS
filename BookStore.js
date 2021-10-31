@@ -1,6 +1,6 @@
 const addBtn = document.getElementById('add-book-btn');
 
-addBtn.addEventListener('click', addBook);
+
 
 class Book {
     constructor(title, author, isbn, numcopies) {
@@ -28,25 +28,39 @@ class Book {
 
 let book1 = new Book('Harry Potter', 'J.K Rowling', '123456', 12);
 
+const bookList = document.querySelector("#book-list");
+let objArr = [];
+
 function addBook() {
+    
     // get the values from the inputs
     const titleVal = document.querySelector("#Title").value;
     const authorVal = document.querySelector("#Author").value;
     const ISBNVal = document.querySelector("#ISBN").value;
     const numCopiesVal = document.querySelector("#numCopies").value;
-    const bookList = document.querySelector("#book-list");
 
     let li = document.createElement('li');
+    let button = document.createElement('button');
 
     // create an new book object
+    let newBook = new Book(titleVal, authorVal, ISBNVal, numCopiesVal);
 
+    objArr.push(newBook);
 
-    // generate a markup HTML
-    li.textContent = `${titleVal} - ${authorVal} - ${ISBNVal} - ${numCopiesVal}`
+    // generate a markup 
+    li.textContent = `${newBook.title} - ${newBook.author} - ${newBook.isbn} - ${newBook.numcopies}`
+    button.textContent = 'Sell';
+    // button.onclick = newBook.sell(2);
 
+    li.appendChild(button);
     //insert this markup in the <ul>
     bookList.appendChild(li)
 
 }
 
 
+addBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    addBook()}
+    );
